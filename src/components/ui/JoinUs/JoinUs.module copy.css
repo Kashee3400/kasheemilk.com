@@ -1,0 +1,1235 @@
+/* ─── JoinUs.module.css ───────────────────────────────────────────────────────
+   Design: Premium editorial LIGHT — warm ivory canvas, deep forest green
+   accents, rich charcoal text. Clean MNC energy meets artisan dairy brand.
+   Font stack: 'Cormorant Garamond' display + 'DM Sans' body (loaded in layout).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ══ DESIGN TOKENS — LIGHT MODE ══════════════════════════════════════════════ */
+.page {
+  /* Backgrounds */
+  --c-bg: #faf8f4;
+  --c-surface: #f4f1eb;
+  --c-surface2: #ede9e1;
+
+  /* Borders */
+  --c-border: rgba(26, 58, 42, 0.1);
+
+  /* Brand greens */
+  --c-green: #1a3a2a;
+  --c-green-lt: #2d6a4f;
+  --c-green-btn: #2d6a4f;
+  --c-green-btn-hover: #1a3a2a;
+
+  /* Text */
+  --c-text: #1a1a18;
+  --c-text-dim: rgba(26, 26, 24, 0.52);
+  --c-white: #1a1a18;
+  /* repurposed: headings use this so they stay dark */
+
+  /* Tags */
+  --c-tag-bg: rgba(45, 106, 79, 0.1);
+  --c-tag-text: #1a3a2a;
+
+  /* Hero stat card */
+  --c-stat-bg: rgba(244, 241, 235, 0.85);
+
+  background: var(--c-bg);
+  color: var(--c-text);
+  min-height: 100vh;
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* ══ HERO ══════════════════════════════════════════════════════════════════════ */
+/* Image always visible at 65vh. Scrim + all content fade in on hover.         */
+
+.hero {
+  position: relative;
+  height: 75vh;
+  min-height: 28rem;
+  max-height: 52rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* Image — always visible, subtle zoom on hover */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center 30%;
+  z-index: 0;
+  filter: brightness(0.92) saturate(0.75);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero:hover .heroBg {
+  transform: scale(1.04);
+}
+
+/* Dark scrim — hidden by default, fades in on hover */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(10, 20, 14, 0.82) 0%, rgba(10, 20, 14, 0.58) 55%, rgba(10, 20, 14, 0.32) 100%),
+    linear-gradient(to top, rgba(10, 20, 14, 0.75) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero:hover .heroOverlay {
+  opacity: 1;
+}
+
+/* Content — hidden by default, slides up + fades in on hover */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.42s ease 0.1s, transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+  pointer-events: none;
+}
+
+.hero:hover .heroContent {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.heroLeft {}
+
+/* On hover text is over dark scrim — flip all text to white */
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #74c69d;
+  margin-bottom: 1.25rem;
+}
+
+.heroEyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #74c69d;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+.heroHeadline {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.heroHeadlineAccent {
+  color: #74c69d;
+  font-style: italic;
+}
+
+.heroSubheadline {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+.heroDescription {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 48ch;
+  margin: 0 0 1.75rem;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.75rem;
+  background: #74c69d;
+  color: #0a1a0f;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 0.35rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.heroCta:hover {
+  background: #ffffff;
+  color: #1a3a2a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.heroCtaArrow {
+  transition: transform 0.2s ease;
+}
+
+.heroCta:hover .heroCtaArrow {
+  transform: translateX(4px);
+}
+
+/* Stats card grid — on dark scrim so use frosted glass style */
+.heroStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+.heroStat {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+
+.heroStatValue {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #74c69d;
+  line-height: 1;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.heroStatLabel {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 900px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .heroStats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    height: 70vh;
+  }
+
+  .heroStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .heroHeadline {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+}
+
+/* Touch devices: content always visible (no hover) */
+@media (hover: none) {
+  .heroOverlay {
+    opacity: 1;
+  }
+
+  .heroContent {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .heroBg {
+    transform: none !important;
+  }
+}
+
+/* ══ SHARED SECTION WRAPPER ══════════════════════════════════════════════════ */
+.section {
+  padding: 6rem 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sectionDivider {
+  border: none;
+  border-top: 1px solid var(--c-border);
+  margin: 0;
+}
+
+.sectionLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-green-lt);
+  /* forest green — still readable on ivory */
+  margin: 0 0 0.75rem;
+}
+
+.sectionHeading {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--c-green);
+  margin: 0 0 0.75rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.sectionSubheading {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+  max-width: 60ch;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.sectionHeader {
+  margin-bottom: 3.5rem;
+}
+
+/* ══ VALUES ══════════════════════════════════════════════════════════════════ */
+.valuesSection {
+  background: var(--c-surface);
+  padding: 6rem 2rem;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  background: var(--c-border);
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.valueCard {
+  background: var(--c-surface);
+  padding: 2.5rem 2rem;
+  transition: background 0.22s ease;
+}
+
+.valueCard:hover {
+  background: var(--c-surface2);
+}
+
+.valueIcon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.valueTitle {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--c-green);
+  margin: 0 0 0.6rem;
+}
+
+.valueDesc {
+  font-size: 0.85rem;
+  color: var(--c-text-dim);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══ BENEFITS ════════════════════════════════════════════════════════════════ */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.benefitCard {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 0.75rem;
+  padding: 1.75rem 1.5rem;
+  transition: border-color 0.22s ease, transform 0.22s ease;
+}
+
+.benefitCard:hover {
+  border-color: rgba(26, 58, 42, 0.35);
+  transform: translateY(-3px);
+}
+
+.benefitIcon {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.benefitTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-green);
+  margin: 0 0 0.5rem;
+}
+
+.benefitDesc {
+  font-size: 0.8rem;
+  color: var(--c-text-dim);
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══ JOB OPENINGS ════════════════════════════════════════════════════════════ */
+.openingsSection {
+  background: var(--c-surface);
+  padding: 6rem 2rem;
+}
+
+.openingsInner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Filter bar */
+.jobFilters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.filterPill {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-border);
+  background: transparent;
+  color: var(--c-text-dim);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.17s ease;
+  white-space: nowrap;
+}
+
+.filterPill:hover {
+  border-color: var(--c-green);
+  color: var(--c-green);
+}
+
+.filterPill.activePill {
+  background: var(--c-green-lt);
+  border-color: var(--c-green);
+  color: #fff;
+  font-weight: 700;
+}
+
+.filterCount {
+  font-size: 0.68rem;
+  opacity: 0.7;
+}
+
+/* Job list */
+.jobList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--c-border);
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.jobCard {
+  background: var(--c-surface);
+  padding: 1.75rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.18s ease;
+  border: none;
+  text-align: left;
+  width: 100%;
+}
+
+.jobCard:hover {
+  background: var(--c-surface2);
+}
+
+.jobCardLeft {}
+
+.jobCardTopRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.jobTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-green);
+  margin: 0;
+}
+
+.featuredBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-green);
+  border: 1px solid var(--c-green);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.jobMeta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.jobMetaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--c-text-dim);
+}
+
+.jobMetaIcon {
+  opacity: 0.5;
+}
+
+.jobSummary {
+  font-size: 0.82rem;
+  color: var(--c-text-dim);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 80ch;
+}
+
+.jobTags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.jobTag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background: var(--c-tag-bg);
+  color: var(--c-tag-text);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.jobCardRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.jobSalary {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--c-green);
+  white-space: nowrap;
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  background: transparent;
+  border: 1.5px solid var(--c-green);
+  color: var(--c-green);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.applyBtn:hover {
+  background: var(--c-green-lt);
+  color: #fff;
+}
+
+.emptyJobs {
+  text-align: center;
+  padding: 4rem;
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+}
+
+.emptyJobsIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .jobCard {
+    grid-template-columns: 1fr;
+  }
+
+  .jobCardRight {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ══ HIRING PROCESS ══════════════════════════════════════════════════════════ */
+.processTrack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.processStep {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+  position: relative;
+}
+
+.processStep::before {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  top: 3.5rem;
+  bottom: -1px;
+  width: 1px;
+  background: var(--c-border);
+}
+
+.processStep:last-child::before {
+  display: none;
+}
+
+.processStepLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+}
+
+.processStepNumber {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--c-green);
+  background: var(--c-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--c-green);
+  flex-shrink: 0;
+}
+
+.processStepRight {
+  padding: 0.5rem 0 3rem;
+}
+
+.processStepTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-green);
+  margin: 0 0 0.4rem;
+}
+
+.processStepDesc {
+  font-size: 0.85rem;
+  color: var(--c-text-dim);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ══ TESTIMONIALS ════════════════════════════════════════════════════════════ */
+.testimonialsSection {
+  background: var(--c-surface);
+  padding: 6rem 2rem;
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 72rem;
+  margin: 3.5rem auto 0;
+}
+
+.testimonialCard {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.22s ease;
+}
+
+.testimonialCard:hover {
+  border-color: rgba(26, 58, 42, 0.25);
+  box-shadow: 0 4px 24px rgba(26, 58, 42, 0.07);
+}
+
+.testimonialQuoteMark {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 4rem;
+  line-height: 0.5;
+  color: var(--c-green);
+  opacity: 0.3;
+  user-select: none;
+}
+
+.testimonialQuote {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--c-text);
+  margin: 0;
+  font-style: italic;
+}
+
+.testimonialAuthor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.testimonialAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--c-green-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-white);
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonialName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-green);
+  margin: 0 0 0.15rem;
+}
+
+.testimonialRole {
+  font-size: 0.75rem;
+  color: var(--c-text-dim);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══ APPLICATION MODAL ═══════════════════════════════════════════════════════ */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(26, 58, 42, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: backdropIn 0.22s ease;
+}
+
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  box-shadow: 0 32px 80px rgba(26, 58, 42, 0.18);
+  border-radius: 1.25rem;
+  width: 100%;
+  max-width: 52rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-border) transparent;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalHeader {
+  position: sticky;
+  top: 0;
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-border);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.modalJobTitle {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--c-green);
+  margin: 0 0 0.25rem;
+}
+
+.modalJobDept {
+  font-size: 0.78rem;
+  color: var(--c-green-lt);
+  /* forest green reads well on ivory */
+  margin: 0;
+  font-weight: 500;
+}
+
+.modalClose {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: transparent;
+  color: var(--c-text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.17s ease;
+  flex-shrink: 0;
+}
+
+.modalClose:hover {
+  border-color: var(--c-green);
+  color: var(--c-green);
+  background: var(--c-surface);
+}
+
+.modalBody {
+  padding: 2rem;
+}
+
+/* Form layout */
+.formSection {
+  margin-bottom: 2.5rem;
+}
+
+.formSectionTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-green);
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formRowFull {
+  grid-column: 1 / -1;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.formLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--c-text-dim);
+  letter-spacing: 0.02em;
+}
+
+.formLabel .required {
+  color: #f97316;
+  margin-left: 0.2rem;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  background: #fff;
+  border: 1.5px solid var(--c-border);
+  border-radius: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.88rem;
+  color: var(--c-text);
+  font-family: inherit;
+  width: 100%;
+  transition: border-color 0.17s ease, box-shadow 0.17s ease;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: rgba(26, 26, 24, 0.28);
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: var(--c-green-lt);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.formInput.inputError,
+.formSelect.inputError,
+.formTextarea.inputError {
+  border-color: #f97316;
+}
+
+.formSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(26,26,24,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.formSelect option {
+  background: var(--c-surface);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.fieldError {
+  font-size: 0.72rem;
+  color: #f97316;
+  margin: 0;
+}
+
+.formHint {
+  font-size: 0.72rem;
+  color: var(--c-text-dim);
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Checkbox */
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.formCheckbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--c-green-lt);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkboxLabel {
+  font-size: 0.82rem;
+  color: var(--c-text-dim);
+  cursor: pointer;
+}
+
+/* Submit row */
+.formSubmitRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--c-border);
+  flex-wrap: wrap;
+}
+
+.formPrivacyNote {
+  font-size: 0.72rem;
+  color: var(--c-text-dim);
+  opacity: 0.65;
+  max-width: 40ch;
+  line-height: 1.5;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: var(--c-green);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 0.45rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--c-green-btn-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26, 58, 42, 0.2);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submitBtnSpinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .formSubmitRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .submitBtn {
+    justify-content: center;
+  }
+
+  .modalBody {
+    padding: 1.25rem;
+  }
+
+  .modalHeader {
+    padding: 1.25rem;
+  }
+}
+
+/* ══ SUCCESS STATE ═══════════════════════════════════════════════════════════ */
+.successState {
+  text-align: center;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.successIcon {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: rgba(45, 106, 79, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--c-green-lt);
+  margin-bottom: 0.5rem;
+}
+
+.successTitle {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--c-green);
+  margin: 0;
+}
+
+.successMessage {
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+  line-height: 1.7;
+  max-width: 48ch;
+  margin: 0;
+}
+
+.successId {
+  font-size: 0.75rem;
+  color: var(--c-green-lt);
+  background: var(--c-tag-bg);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-family: monospace;
+}
+
+.successCloseBtn {
+  margin-top: 1rem;
+  padding: 0.7rem 1.75rem;
+  background: transparent;
+  border: 1.5px solid var(--c-green);
+  color: var(--c-green);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 0.45rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.successCloseBtn:hover {
+  background: var(--c-green);
+  color: #fff;
+}
+
+/* ══ LOADING SKELETONS ═══════════════════════════════════════════════════════ */
+.skeleton {
+  background: linear-gradient(90deg, #eae7e0 25%, #f0ece4 50%, #eae7e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeletonJobCard {
+  height: 6rem;
+  border-radius: 0;
+}

@@ -1,0 +1,433 @@
+/* ── AboutSection.module.css ─────────────────────────────────── */
+
+/* ── Section wrapper ─────────────────────────────────────────── */
+.section {
+    padding: 72px 0;
+    background: #f7faf8;
+}
+
+.inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 28px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+/* ── About column ────────────────────────────────────────────── */
+.aboutCol {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.bodyText {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #4a6555;
+    margin: 0;
+}
+
+/* ── Districts ───────────────────────────────────────────────── */
+.districtsWrap {
+    margin-bottom: 28px;
+}
+
+.districtsLabel {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7a9985;
+    margin-bottom: 10px;
+}
+
+/* Scrollable row — hides scrollbar but stays scrollable */
+.districtsScroll {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    /* space for scrollbar on Windows */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.districtsScroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Non-scrollable fallback (feature flag off) */
+.districtsWrap.noScroll .districtsScroll {
+    flex-wrap: wrap;
+}
+
+.districtTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid #c2dbd0;
+    background: #fff;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #2d5a42;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.districtTag:hover {
+    background: #e8f5ee;
+    border-color: #52b788;
+    color: #0a2318;
+}
+
+.districtDot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #52b788;
+    flex-shrink: 0;
+}
+
+/* ── SDG Badges ──────────────────────────────────────────────── */
+.sdgWrap {
+    margin-bottom: 28px;
+}
+
+.sdgLabel {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7a9985;
+    margin-bottom: 12px;
+}
+
+/* Scrollable row */
+.sdgScroll {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.sdgScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.sdgWrap.noScroll .sdgScroll {
+    flex-wrap: wrap;
+}
+
+.sdgItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    text-decoration: none;
+    cursor: default;
+}
+
+.sdgItem[href] {
+    cursor: pointer;
+}
+
+.sdgImg {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #e2ede8;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.sdgItem:hover .sdgImg {
+    transform: translateY(-2px);
+    border-color: #52b788;
+}
+
+.sdgBadgeLabel {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7a9985;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ── CTA button ──────────────────────────────────────────────── */
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #0a2318, #1a6b40);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s, box-shadow 0.15s, transform 0.15s;
+    align-self: flex-start;
+}
+
+.cta:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(10, 35, 24, 0.22);
+}
+
+.ctaIcon {
+    transition: transform 0.2s;
+}
+
+.cta:hover .ctaIcon {
+    transform: translateX(3px);
+}
+
+/* ── News column ─────────────────────────────────────────────── */
+.newsCol {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.newsCard {
+    border: 1px solid #dde8e2;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(10, 35, 24, 0.06);
+}
+
+/* Header bar */
+.newsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #0f2d1c;
+}
+
+.newsHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.newsLiveDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #52b788;
+    animation: pulseDot 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulseDot {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.55;
+        transform: scale(0.8);
+    }
+}
+
+.newsHeaderLabel {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.newsHeaderLink {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.newsHeaderLink:hover {
+    color: #fff;
+}
+
+/* ── Marquee / Ticker ─────────────────────────────────────────── */
+.marqueeOuter {
+    position: relative;
+    /* Fixed height — clips duplicate items, shows ~3 rows */
+    height: 220px;
+    overflow: hidden;
+    /* Soft fade at top/bottom */
+    -webkit-mask-image: linear-gradient(to bottom,
+            transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom,
+            transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.marqueeTrack {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+}
+
+/* Paused state (hover) */
+.marqueePaused {
+    animation-play-state: paused !important;
+}
+
+@keyframes tickerScrollY {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+
+    /* -50% because list is doubled */
+}
+
+/* Individual news item */
+.newsItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f6f2;
+    text-decoration: none;
+    transition: background 0.13s;
+    flex-shrink: 0;
+}
+
+.newsItem:hover {
+    background: #f7fbf8;
+}
+
+.newsItem:last-child {
+    border-bottom: none;
+}
+
+.newsThumb {
+    position: relative;
+    width: 60px;
+    height: 48px;
+    border-radius: 7px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid #e2ede8;
+}
+
+.newsThumbImg {
+    object-fit: cover;
+}
+
+.newsBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.newsTitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1e3828;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+}
+
+.newsSource {
+    font-size: 11px;
+    color: #7a9985;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.newsArrow {
+    color: #b0cfc0;
+    flex-shrink: 0;
+    transition: color 0.13s, transform 0.13s;
+}
+
+.newsItem:hover .newsArrow {
+    color: #2d8a55;
+    transform: translateX(2px);
+}
+
+/* Footer */
+.newsFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    background: #f7fbf8;
+    border-top: 1px solid #e8f2ec;
+}
+
+.newsFooterLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #1a6b40;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.newsFooterLink:hover {
+    color: #0a2318;
+}
+
+.newsFooterLinkIcon {
+    transition: transform 0.15s;
+}
+
+.newsFooterLink:hover .newsFooterLinkIcon {
+    transform: translateX(2px);
+}
+
+.newsCount {
+    font-size: 11.5px;
+    color: #9ab4a2;
+    font-weight: 500;
+}

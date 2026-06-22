@@ -1,0 +1,285 @@
+/* ── StatsSection.module.css ─────────────────────────────────── */
+
+.section {
+  padding: 56px 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: #e8f5ee;
+  margin-bottom: 14px;
+}
+
+.eyebrowIcon {
+  color: #1a6b40;
+}
+
+.eyebrowText {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1a6b40;
+}
+
+.heading {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #0a2318;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.headingAccent {
+  font-style: italic;
+  color: #c8973a;
+}
+
+.subtext {
+  font-size: 14px;
+  color: #6b8c7a;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Track — the scrollable row ──────────────────────────────── */
+.track {
+  display: flex;
+  gap: 16px;
+  /* Always flex row — scroll when overflow */
+  overflow-x: auto;
+  padding: 8px 4px 16px;
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* Prevent vertical bleed */
+  scroll-behavior: smooth;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scroll-snap (feature flag via class) */
+.trackSnap {
+  scroll-snap-type: x mandatory;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.card {
+  flex: 0 0 auto;
+  /* never shrink — cards keep their size */
+  width: 190px;
+  /* compact fixed width */
+  background: #fff;
+  border: 1px solid #dde8e2;
+  border-radius: 16px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  box-shadow: 0 2px 12px rgba(10, 35, 24, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0a2318, #1a6b40, #c8973a);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(10, 35, 24, 0.12);
+  border-color: #b2d9c3;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Scroll-snap target */
+.trackSnap .card {
+  scroll-snap-align: start;
+}
+
+/* Stagger alternate cards */
+.cardOffset {
+  margin-top: 20px;
+}
+
+/* ── Icon ────────────────────────────────────────────────────── */
+.iconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f0faf4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+  border: 1px solid #d4ede0;
+  transition: background 0.2s;
+}
+
+.card:hover .iconWrap {
+  background: #e0f5ea;
+}
+
+/* ── Number ──────────────────────────────────────────────────── */
+.number {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0a2318;
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+/* ── Divider ─────────────────────────────────────────────────── */
+.divider {
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #1a6b40, #c8973a);
+  margin-bottom: 10px;
+}
+
+/* ── Label ───────────────────────────────────────────────────── */
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b8c7a;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ── Scroll hint arrows (desktop, appear on hover of section) ── */
+.scrollHint {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.scrollBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #dde8e2;
+  background: #fff;
+  color: #4a6b55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.scrollBtn:hover {
+  background: #0a2318;
+  border-color: #0a2318;
+  color: #fff;
+}
+
+.scrollBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── Dot indicators ──────────────────────────────────────────── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8ddd0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.2s, background 0.2s;
+}
+
+.dotActive {
+  width: 18px;
+  border-radius: 3px;
+  background: #1a6b40;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+/* On wide screens with ≤4 cards, centre them */
+@media (min-width: 900px) {
+  .track {
+    justify-content: center;
+    flex-wrap: wrap;
+    /* wrap instead of scroll when all fit */
+    overflow-x: visible;
+  }
+
+  /* Re-enable scroll if there are many cards (via .forceScroll) */
+  .track.forceScroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .scrollHint {
+    display: none;
+  }
+
+  /* hide arrows, not needed */
+}
+
+@media (max-width: 899px) {
+  .card {
+    width: 160px;
+    padding: 20px 16px 16px;
+  }
+
+  .number {
+    font-size: 1.7rem;
+  }
+
+  .cardOffset {
+    margin-top: 0;
+  }
+
+  /* no stagger on mobile */
+}
