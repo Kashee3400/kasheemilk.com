@@ -43,7 +43,7 @@ export default function AboutPage() {
               With financial assistance from <strong className="text-kashee-charcoal">UPSRLM</strong> and technical support from <strong className="text-kashee-charcoal">NDDB Dairy Services</strong>, Kashee Milk now operates across seven districts: Ballia, Chandauli, Ghazipur, Mirzapur, Sonbhadra, Bhadohi, and Varanasi.
             </p>
             <div className="flex gap-4 pt-4">
-              <Button href="/chairmans-message">Chairman's Message</Button>
+              <Button href="/chairmans-message" variant="outline">Chairman's Message</Button>
               <Button href="/board-of-directors" variant="outline">Board of Directors</Button>
             </div>
           </div>

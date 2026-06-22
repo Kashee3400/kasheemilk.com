@@ -38,7 +38,7 @@ export function SectionHeading({
       <h2
         className={clsx(
           "font-display text-3xl md:text-4xl lg:text-5xl leading-tight",
-          light ? "text-white" : "text-kashee-charcoal"
+          light ? "text-dark" : "text-kashee-charcoal"
         )}
       >
         {title}
@@ -48,7 +48,7 @@ export function SectionHeading({
         <p
           className={clsx(
             "font-body text-base md:text-lg leading-relaxed max-w-2xl",
-            light ? "text-white/70" : "text-kashee-charcoal/60",
+            light ? "text-dark/70" : "text-kashee-charcoal/60",
             align === "center" && "mx-auto"
           )}
         >

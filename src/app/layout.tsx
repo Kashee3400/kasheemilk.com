@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import HeaderServer from "@/components/layout/HeaderServer";
 import FooterServer from "@/components/layout/FooterServer";
+import SiteChrome from "@/components/layout/SiteChrome";
 
 export const metadata: Metadata = {
   // metadataBase is highly recommended in Next.js so relative links in OG/Twitter tags resolve correctly
@@ -84,10 +85,13 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <link rel="icon" href="./favicon.ico" />
       <body className="grain-overlay antialiased">
-        <HeaderServer />
-        <main>{children}</main>
-        <FooterServer />
-        <ScrollToTop />
+        <SiteChrome
+          header={<HeaderServer />}
+          footer={<FooterServer />}
+          scrollToTop={<ScrollToTop />}
+        >
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

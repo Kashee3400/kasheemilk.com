@@ -23,6 +23,12 @@
   --warm-white: #fffdf8;
   --charcoal: #1a1a1a;
   --muted: #5a6b60;
+  /* Kashee Journey page tokens — add to your global :root */
+  --deep: #0f2419;
+  --gold-lt: #e8c96a;
+  --sage: #e2ede5;
+  --mist: #f2f7f3;
+  --text: #1c2b22;
   /* === TYPOGRAPHY === */
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
