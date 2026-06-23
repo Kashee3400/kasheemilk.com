@@ -275,7 +275,7 @@ export default function KasheeFooter({ data }: { data: FooterData }) {
                     </Link>
                   </li>
                 ))}
-                {cmsPages.map((page) => (
+                {cmsPages && cmsPages.map((page) => (
                   <li key={`cms-${page.id}`}>
                     <Link
                       href={page.href}
