@@ -102,19 +102,11 @@ export default function KasheeFooter({ data }: { data: FooterData }) {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <p className="text-[10.5px] font-semibold tracking-[0.16em] uppercase text-amber-300 mb-2">
-                  {cfg.newsletter_subtext}
+                  {cfg.newsletter_subtext || "Newsletter"}
                 </p>
-                <h2 className="font-display text-xl md:text-2xl font-bold text-white leading-tight max-w-xs"
-                  dangerouslySetInnerHTML={{
-                    __html: cfg.newsletter_heading!.replace(
-                      /&/g,
-                      '&amp;'
-                    ).replace(
-                      /(Exclusive Offers|Exclusive)/gi,
-                      '<em class="not-italic text-amber-300">$1</em>'
-                    ),
-                  }}
-                />
+                <h2 className="font-display text-xl md:text-2xl font-bold text-white leading-tight max-w-xs">
+                  {cfg.newsletter_heading || "Subscribe for Updates"}
+                </h2>
               </div>
 
               {f(ff, "footer.newsletter_form") && (

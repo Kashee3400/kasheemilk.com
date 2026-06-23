@@ -28,13 +28,16 @@ export const metadata: Metadata = {
 
 // ── Server-side data fetch ──────────────────────────────────────────────────
 async function getGalleryData(): Promise<GalleryResponse> {
+  try {
+    const res = await fetch(`${getBaseUrl()}/api/gallery`, {
+      next: { revalidate: 3600 },
+    });
 
-  const res = await fetch(`${getBaseUrl()}/api/gallery`, {
-    next: { revalidate: 3600 },
-  });
-
-  if (!res.ok) throw new Error("Failed to fetch gallery data");
-  return res.json();
+    if (!res.ok) throw new Error("Failed to fetch gallery data");
+    return res.json();
+  } catch {
+    return { items: [], meta: { totalCount: 0, categories: [] } };
+  }
 }
 
 // ── Page ────────────────────────────────────────────────────────────────────

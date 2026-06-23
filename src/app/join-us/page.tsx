@@ -22,13 +22,28 @@ export const metadata: Metadata = {
 };
 
 async function getCareersData(): Promise<CareersData> {
-    const res = await fetch(`${getBaseUrl()}/api/careers/content`, {
-        // jobs change more frequently than copy — use the lower TTL
-        next: { revalidate: 300 },
-    });
-    if (!res.ok) throw new Error("Failed to fetch careers data");
-    const json = await res.json();
-    return json.data;
+    try {
+        const res = await fetch(`${getBaseUrl()}/api/careers/content`, {
+            // jobs change more frequently than copy — use the lower TTL
+            next: { revalidate: 300 },
+        });
+        if (!res.ok) throw new Error("Failed to fetch careers data");
+        const json = await res.json();
+        return json.data;
+    } catch {
+        return {
+            hero: null,
+            stats: [],
+            values: [],
+            benefits: [],
+            testimonials: [],
+            hiringProcess: [],
+            departments: [],
+            jobs: [],
+            config: {},
+            featureFlags: {},
+        };
+    }
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -62,13 +77,13 @@ export default async function JoinUsPage() {
                         {hero && (
                             <>
                                 <h1 className={styles.heroHeadline}>
-                                    {hero.headline.split(" ").slice(0, -1).join(" ")}{" "}
+                                    {hero.headline?.split(" ").slice(0, -1).join(" ") || "Join Our Team"}{" "}
                                     <span className={styles.heroHeadlineAccent}>
-                                        {hero.headline.split(" ").at(-1)}
+                                        {hero.headline?.split(" ").at(-1) || ""}
                                     </span>
                                 </h1>
-                                <p className={styles.heroSubheadline}>{hero.subheadline}</p>
-                                <p className={styles.heroDescription}>{hero.description}</p>
+                                <p className={styles.heroSubheadline}>{hero.subheadline || ""}</p>
+                                {hero.description && <p className={styles.heroDescription}>{hero.description}</p>}
                                 {/* cta_anchor → cta_href (column rename in page_heroes) */}
                                 {hero.cta_href && hero.cta_label && (
                                     <Link href={hero.cta_href} className={styles.heroCta}>
