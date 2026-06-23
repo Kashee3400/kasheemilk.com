@@ -11,7 +11,8 @@
 //     footer_legal_links) are unchanged.
 
 import { NextResponse } from "next/server";
-import { query } from "@/lib/db";
+import { query, gquery } from "@/lib/db";
+import type { CmsPageRow } from "@/types/db";
 
 export const revalidate = 60;
 
@@ -26,6 +27,7 @@ export async function GET() {
             navRows,
             configRows,
             flagRows,
+            cmsFooterPages,
         ] = await Promise.all([
 
             // ── 1. Footer stats strip ──────────────────────────────────────────
@@ -100,6 +102,15 @@ export async function GET() {
                 FROM   feature_flags
                 WHERE  key LIKE 'footer.%'
             `),
+
+            // ── 9. CMS pages for footer (show_in_footer = true) ───────────────
+            gquery<Pick<CmsPageRow, "id" | "title" | "slug" | "footer_sort_order">>(`
+                SELECT id, title, slug, footer_sort_order
+                FROM   cms_pages
+                WHERE  show_in_footer = TRUE
+                  AND  status = 'published'
+                ORDER  BY footer_sort_order
+            `),
         ]);
 
         const config = Object.fromEntries(configRows.map((r) => [r.key, r.value]));
@@ -114,6 +125,12 @@ export async function GET() {
             legalLinks:  legalRows,
             socialLinks: socialRows,
             navItems:    navRows,
+            cmsPages:    cmsFooterPages.map((p) => ({
+              id: p.id,
+              label: p.title,
+              href: `/pages/${p.slug}`,
+              sort_order: p.footer_sort_order,
+            })),
             config,
             featureFlags,
         });

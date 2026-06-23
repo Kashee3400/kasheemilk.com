@@ -83,6 +83,9 @@ export type ContactSubject =
 
 export type ContactStatus = "new" | "read" | "replied" | "archived";
 
+/** CMS page status enum - mirrors PostgreSQL cms_page_status enum */
+export type CmsPageStatus = "draft" | "published";
+
 export type GalleryCategory =
     | "events"
     | "milestones"
@@ -528,6 +531,27 @@ export interface ContactFaqItemRow {
     updated_at: PgTimestamp;
 }
 
+// ── 09. cms_pages ───────────────────────────────────────────────────────────
+export interface CmsPageRow {
+    id: PgInt;
+    title: PgText;
+    slug: PgText;
+    meta_title: PgText | null;
+    meta_description: PgText | null;
+    featured_image_url: PgText | null;
+    short_description: PgText | null;
+    page_content: PgText | null;
+    status: CmsPageStatus;
+    show_in_navbar: PgBoolean;
+    navbar_parent_id: PgInt | null;
+    navbar_sort_order: PgSmallInt;
+    show_in_footer: PgBoolean;
+    footer_sort_order: PgSmallInt;
+    seo_keywords: PgTextArray;
+    created_at: PgTimestamp;
+    updated_at: PgTimestamp;
+}
+
 
 // ══════════════════════════════════════════════════════════════════════════
 // 03. VIEW ROW TYPES
@@ -645,6 +669,7 @@ export interface FooterData {
     legalLinks: Pick<FooterLegalLinkRow, "id" | "label" | "href" | "open_in_new" | "sort_order">[];
     socialLinks: Pick<SocialLinkRow, "id" | "platform" | "url" | "icon_name" | "sort_order">[];
     navItems: Pick<NavItemRow, "id" | "label" | "href" | "open_in_new">[];
+    cmsPages: { id: PgInt; label: PgText; href: PgText; sort_order: PgSmallInt }[];
     config: Partial<FooterConfig>;
     featureFlags: Partial<FooterFeatureFlags>;
 }
@@ -893,6 +918,17 @@ export interface ContactFeatureFlags {
     "contact.multi_office": boolean;
 }
 
+// ── /api/pages/[slug] ─────────────────────────────────────────────────────
+export interface CmsPageData {
+    page: CmsPageRow;
+}
+
+// ── /api/pages (admin list) ───────────────────────────────────────────────
+export interface CmsPageListData {
+    pages: CmsPageRow[];
+    total: number;
+}
+
 
 // ══════════════════════════════════════════════════════════════════════════
 // 05. SITE_CONFIG KEY UNIONS
@@ -1044,4 +1080,22 @@ export interface ApplicationSubmitResponse {
 /** Body expected by POST /api/newsletter */
 export interface NewsletterSignupInput {
     email: string;
+}
+
+/** Body expected by POST/PATCH /api/admin/resources for cms_pages */
+export interface CmsPageInput {
+    title: string;
+    slug: string;
+    meta_title?: string;
+    meta_description?: string;
+    featured_image_url?: string;
+    short_description?: string;
+    page_content?: string;
+    status?: CmsPageStatus;
+    show_in_navbar?: boolean;
+    navbar_parent_id?: number | null;
+    navbar_sort_order?: number;
+    show_in_footer?: boolean;
+    footer_sort_order?: number;
+    seo_keywords?: string[];
 }

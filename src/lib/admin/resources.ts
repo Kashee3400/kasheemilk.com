@@ -445,6 +445,34 @@ export const resources: Record<string, AdminResource> = {
       { key: "description", label: "Description", kind: "textarea" },
     ],
   },
+  cms_pages: {
+    id: "cms_pages",
+    title: "Pages",
+    table: "cms_pages",
+    primaryKey: "id",
+    orderBy: "updated_at DESC",
+    revalidate: ["page", "navbar", "footer", "header", "path:/pages"],
+    createFields: ["title", "slug", "status"],
+    fields: [
+      { key: "id", label: "ID", kind: "readonly" },
+      { key: "title", label: "Title", required: true },
+      { key: "slug", label: "Slug", required: true },
+      { key: "status", label: "Status", kind: "select", options: [{ label: "Draft", value: "draft" }, { label: "Published", value: "published" }] },
+      { key: "meta_title", label: "Meta Title" },
+      { key: "meta_description", label: "Meta Description", kind: "textarea" },
+      { key: "featured_image_url", label: "Featured Image URL" },
+      { key: "short_description", label: "Short Description", kind: "textarea" },
+      { key: "page_content", label: "Page Content", kind: "textarea" },
+      { key: "show_in_navbar", label: "Show in Navbar", kind: "boolean" },
+      { key: "navbar_parent_id", label: "Navbar Parent ID", kind: "number" },
+      { key: "navbar_sort_order", label: "Navbar Order", kind: "number" },
+      { key: "show_in_footer", label: "Show in Footer", kind: "boolean" },
+      { key: "footer_sort_order", label: "Footer Order", kind: "number" },
+      { key: "seo_keywords", label: "SEO Keywords", kind: "csv" },
+      { key: "created_at", label: "Created", kind: "readonly" },
+      { key: "updated_at", label: "Updated", kind: "readonly" },
+    ],
+  },
 };
 
 export const modules: Record<string, AdminModule> = {
@@ -503,6 +531,13 @@ export const modules: Record<string, AdminModule> = {
     eyebrow: "Structure",
     description: "Toggle website features without changing code.",
     resources: ["feature_flags"],
+  },
+  pages: {
+    id: "pages",
+    title: "Pages",
+    eyebrow: "Content",
+    description: "Create and manage dynamic pages with rich content, SEO settings, and navigation integration.",
+    resources: ["cms_pages"],
   },
 };
 

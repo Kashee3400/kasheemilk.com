@@ -32,6 +32,7 @@ const FOOTER_FALLBACK: FooterData = {
     legalLinks:  [],
     socialLinks: [],
     navItems:    [],
+    cmsPages:    [],
     config:      {},
     featureFlags: {},
 };

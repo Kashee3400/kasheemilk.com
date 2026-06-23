@@ -11,36 +11,47 @@ declare global {
     var _pgPool: Pool | undefined;
 }
 
-function createPool(): Pool {
-    if (!process.env.DATABASE_URL) {
-        throw new Error(
-            "DATABASE_URL environment variable is not set.\n" +
-            "Add it to .env.local: DATABASE_URL=postgres://kashee:<password>@localhost:5432/kasheemilk2"
-        );
+let pool: Pool;
+
+function getPool(): Pool {
+    if (!pool) {
+        const connectionString = process.env.DATABASE_URL || process.env.SUPABASE_DB_URL;
+        if (!connectionString) {
+            if (process.env.NODE_ENV === "production" && process.env.NEXT_PHASE !== "phase-production-build") {
+                console.warn("DATABASE_URL not set, using empty pool");
+            }
+            return new Pool(); // Empty pool that won't connect
+        }
+        pool = new Pool({
+            connectionString,
+            max: 10,
+            idleTimeoutMillis: 30_000,
+            connectionTimeoutMillis: 5_000,
+            ssl: process.env.NODE_ENV === "production"
+                ? { rejectUnauthorized: false }
+                : false,
+        });
     }
-    return new Pool({
-        connectionString: process.env.DATABASE_URL,
-        max: 10,               // max connections in pool
-        idleTimeoutMillis: 30_000,
-        connectionTimeoutMillis: 5_000,
-        ssl: process.env.NODE_ENV === "production"
-            ? { rejectUnauthorized: false }
-            : false,
-    });
+    return pool;
 }
 
 // Reuse pool across hot-reloads in development
-const pool = globalThis._pgPool ?? createPool();
-if (process.env.NODE_ENV !== "production") globalThis._pgPool = pool;
+if (process.env.NODE_ENV !== "production" && globalThis._pgPool) {
+    pool = globalThis._pgPool;
+}
 
-export default pool;
+if (process.env.NODE_ENV !== "production") {
+    globalThis._pgPool = getPool();
+}
+
+export default getPool();
 
 // ── Typed query helper ─────────────────────────────────────────────────────────
 export async function query<T extends Record<string, unknown>>(
     sql: string,
     params?: unknown[]
 ): Promise<T[]> {
-    const { rows } = await pool.query<T>(sql, params);
+    const { rows } = await getPool().query<T>(sql, params);
     return rows;
 }
 
@@ -49,7 +60,7 @@ export async function gquery<T extends object>(  // ← was: Record<string, unkn
     sql: string,
     params?: unknown[]
 ): Promise<T[]> {
-    const { rows } = await pool.query<T>(sql, params);
+    const { rows } = await getPool().query<T>(sql, params);
     return rows;
 }
 

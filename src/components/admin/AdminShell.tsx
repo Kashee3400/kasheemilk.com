@@ -2,23 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  BarChart3,
-  BriefcaseBusiness,
-  Contact,
-  Flag,
-  GalleryHorizontalEnd,
-  Home,
-  Images,
-  LayoutDashboard,
-  LogOut,
-  Megaphone,
-  Navigation,
-  PanelLeft,
-  Settings,
-  ShieldCheck,
-  UsersRound,
-} from "lucide-react";
+import { BarChart3, BriefcaseBusiness, Contact, FileText, Flag, GalleryHorizontalEnd, Chrome as Home, Images, LayoutDashboard, LogOut, Megaphone, Navigation, PanelLeft, Settings, ShieldCheck, UsersRound } from "lucide-react";
 import type { AdminUser } from "@/lib/admin/auth";
 
 const navGroups = [
@@ -33,6 +17,7 @@ const navGroups = [
     label: "Content",
     items: [
       { href: "/admin/hero", label: "Hero Slider", icon: GalleryHorizontalEnd },
+      { href: "/admin/pages", label: "Pages", icon: FileText },
       { href: "/admin/site-content", label: "Site Content", icon: Settings },
       { href: "/admin/gallery", label: "Gallery", icon: Images },
       { href: "/admin/board", label: "Board", icon: UsersRound },

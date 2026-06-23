@@ -81,7 +81,7 @@ function NewsletterForm({ placeholder, btnLabel }: { placeholder: string; btnLab
 // ── Main Footer ──────────────────────────────────────────────────────────────
 export default function KasheeFooter({ data }: { data: FooterData }) {
   const { config: cfg, stats, services, trustBadges,
-    legalLinks, socialLinks, navItems, featureFlags: ff } = data;
+    legalLinks, socialLinks, navItems, cmsPages, featureFlags: ff } = data;
   const darkMode = f(ff, "footer.dark_mode_support");
   return (
     <footer className={`
@@ -252,11 +252,11 @@ export default function KasheeFooter({ data }: { data: FooterData }) {
           )}
 
           {/* ── QUICK LINKS ─────────────────────────────────────── */}
-          {f(ff, "footer.quick_links") && navItems.length > 0 && (
+          {f(ff, "footer.quick_links") && (navItems.length > 0 || cmsPages.length > 0) && (
             <div>
               <SectionHeading darkMode={darkMode}>Quick Links</SectionHeading>
               <ul className="space-y-0.5">
-                {navItems.slice(0, 8).map((item) => (
+                {navItems.slice(0, 6).map((item) => (
                   <li key={item.id}>
                     <Link
                       href={item.href}
@@ -280,6 +280,31 @@ export default function KasheeFooter({ data }: { data: FooterData }) {
                         "
                       />
                       {item.label}
+                    </Link>
+                  </li>
+                ))}
+                {cmsPages.map((page) => (
+                  <li key={`cms-${page.id}`}>
+                    <Link
+                      href={page.href}
+                      className={`
+                        group flex items-center gap-1.5 py-[6px]
+                        text-[13.5px] text-[#5c7060]
+                        hover:text-[#0a2318]
+                        ${darkMode ? "dark:text-white/50 dark:hover:text-amber-300" : ""}
+                        transition-colors duration-200
+                      `}
+                    >
+                      <ChevronRight
+                        size={13}
+                        className="
+                          text-amber-500 flex-shrink-0
+                          opacity-0 -translate-x-1
+                          group-hover:opacity-100 group-hover:translate-x-0
+                          transition-all duration-200
+                        "
+                      />
+                      {page.label}
                     </Link>
                   </li>
                 ))}
